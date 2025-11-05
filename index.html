@@ -193,12 +193,27 @@
         .browser-content {
             background: #111;
             min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .project-screenshot {
             width: 100%;
             height: auto;
             display: block;
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+        }
+
+        .screenshot-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .project-content {
@@ -394,6 +409,10 @@
                 align-items: flex-start;
                 gap: 40px;
             }
+
+            .screenshot-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -445,6 +464,7 @@
     <section id="projects">
         <h2 class="section-title">Selected Work</h2>
         <div class="projects-grid">
+            <!-- Cash Flow Project with 2 screenshots -->
             <div class="project-card">
                 <div class="project-browser">
                     <div class="browser-header">
@@ -453,7 +473,10 @@
                         <div class="browser-dot"></div>
                     </div>
                     <div class="browser-content">
-                        <img src="https://via.placeholder.com/1400x800/667eea/ffffff?text=Cash+Flow+Dashboard" alt="Cash Flow" class="project-screenshot">
+                        <div class="screenshot-grid">
+                            <img src="images/cashflow-n8n.png" alt="Cash Flow n8n Workflow">
+                            <img src="images/cashflow-sheet.png" alt="Cash Flow Google Sheets">
+                        </div>
                     </div>
                 </div>
                 <div class="project-content">
@@ -473,6 +496,7 @@
                 </div>
             </div>
 
+            <!-- Dolchain Project -->
             <div class="project-card">
                 <div class="project-browser">
                     <div class="browser-header">
@@ -481,22 +505,24 @@
                         <div class="browser-dot"></div>
                     </div>
                     <div class="browser-content">
-                        <img src="images/dolchain.png" alt="Dolchain" class="project-screenshot">
+                        <img src="images/dolchain.png" alt="Dolchain CRM System" class="project-screenshot">
                     </div>
                 </div>
                 <div class="project-content">
                     <h3 class="project-title">⚙️ Dolchain - CRM Automation</h3>
                     <p class="project-description">
-                        Provided executive support while developing automated CRM workflows for a crypto project. Streamlined client onboarding, automated follow-ups, and built reporting systems. Reduced task turnaround time by 30%.
+                        Provided executive support while developing automated CRM workflows for a crypto/blockchain project. Streamlined client onboarding, automated follow-ups, and built reporting systems. Reduced task turnaround time by 30%.
                     </p>
                     <div class="project-tech">
                         <span class="tech-tag">CRM Automation</span>
                         <span class="tech-tag">Zapier</span>
                         <span class="tech-tag">Google Workspace</span>
+                        <span class="tech-tag">Data Management</span>
                     </div>
                 </div>
             </div>
 
+            <!-- Avant IT Project -->
             <div class="project-card">
                 <div class="project-browser">
                     <div class="browser-header">
@@ -505,22 +531,24 @@
                         <div class="browser-dot"></div>
                     </div>
                     <div class="browser-content">
-                        <img src="images/avant.png" alt="Avant IT" class="project-screenshot">
+                        <img src="images/avant.png" alt="Avant IT Team Management" class="project-screenshot">
                     </div>
                 </div>
                 <div class="project-content">
                     <h3 class="project-title">🚀 Avant IT - Team Management</h3>
                     <p class="project-description">
-                        Managed remote outreach team promoting web services. Built automated lead-tracking systems. Reduced manual data entry by 50%, saving executives 10+ hours weekly.
+                        Managed remote outreach team promoting web services to U.S. businesses. Built automated lead-tracking systems in Google Sheets and Zapier. Reduced manual data entry by 50%, saving executives 10+ hours weekly.
                     </p>
                     <div class="project-tech">
                         <span class="tech-tag">Team Management</span>
                         <span class="tech-tag">Zapier</span>
+                        <span class="tech-tag">Google Sheets</span>
                         <span class="tech-tag">Lead Tracking</span>
                     </div>
                 </div>
             </div>
 
+            <!-- Job Matching Project -->
             <div class="project-card">
                 <div class="project-browser">
                     <div class="browser-header">
@@ -529,21 +557,22 @@
                         <div class="browser-dot"></div>
                     </div>
                     <div class="browser-content">
-                        <img src="images/jobmatch-workflow.png" alt="Job Matching" class="project-screenshot">
+                        <div class="screenshot-grid">
+                            <img src="images/jobmatch-workflow.png" alt="Job Matching Workflow">
+                            <img src="images/jobmatch-sheet.png" alt="Job Matching Results">
+                        </div>
                     </div>
                 </div>
                 <div class="project-content">
                     <h3 class="project-title">🎯 Job Matching System</h3>
                     <p class="project-description">
-                        Developed automation using n8n and OpenAI that analyzes CVs, identifies matching jobs from multiple boards, and logs results. Improved efficiency by 40% for 200+ applications.
+                        Developed automation using n8n and OpenAI that analyzes CVs, identifies matching jobs from multiple boards, and logs results to Google Sheets. Improved efficiency by 40% for 200+ applications.
                     </p>
                     <div class="project-tech">
                         <span class="tech-tag">n8n</span>
                         <span class="tech-tag">OpenAI API</span>
                         <span class="tech-tag">Google Sheets</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="images/jobmatch-sheet.png" target="_blank" class="project-link">View Results →</a>
+                        <span class="tech-tag">AI Integration</span>
                     </div>
                 </div>
             </div>
