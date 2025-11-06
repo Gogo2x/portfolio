@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David Chigozie - Automation Specialist</title>
+    <title>David Chigozie - Automation Specialist & Virtual Assistant</title>
     <style>
         * {
             margin: 0;
@@ -28,7 +28,7 @@
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
@@ -36,9 +36,6 @@
         .logo {
             font-size: 1.2rem;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .menu-btn {
@@ -140,11 +137,68 @@
             padding: 120px 50px;
         }
 
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
         .section-title {
             font-size: 4rem;
-            margin-bottom: 80px;
+            margin-bottom: 20px;
             font-weight: 800;
-            background: linear-gradient(135deg, #fff, #888);
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .automation-section {
+            background: linear-gradient(180deg, #000 0%, #0a0a2e 50%, #000 100%);
+            position: relative;
+        }
+
+        .automation-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+        }
+
+        .automation-section .section-title {
+            background: linear-gradient(135deg, #667eea, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .va-section {
+            background: linear-gradient(180deg, #000 0%, #1a0a00 50%, #000 100%);
+            position: relative;
+        }
+
+        .va-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+        }
+
+        .va-section .section-title {
+            background: linear-gradient(135deg, #FFD700, #FF6B6B);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -170,6 +224,16 @@
             overflow: hidden;
             box-shadow: 0 40px 100px rgba(0,0,0,0.8);
             border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .automation-section .project-browser {
+            border-color: rgba(102, 126, 234, 0.3);
+            box-shadow: 0 40px 100px rgba(102, 126, 234, 0.2);
+        }
+
+        .va-section .project-browser {
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 40px 100px rgba(255, 215, 0, 0.2);
         }
 
         .browser-header {
@@ -225,7 +289,16 @@
             font-size: 2.5rem;
             margin-bottom: 20px;
             font-weight: 800;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
+        }
+
+        .automation-section .project-title {
+            background: linear-gradient(135deg, #667eea, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .va-section .project-title {
+            background: linear-gradient(135deg, #FFD700, #FF6B6B);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -246,12 +319,21 @@
 
         .tech-tag {
             padding: 8px 18px;
-            background: rgba(255,215,0,0.1);
-            border: 1px solid rgba(255,215,0,0.3);
             border-radius: 20px;
             font-size: 0.9rem;
-            color: #FFD700;
             font-weight: 600;
+        }
+
+        .automation-section .tech-tag {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            color: #667eea;
+        }
+
+        .va-section .tech-tag {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: #FFD700;
         }
 
         .project-links {
@@ -274,10 +356,67 @@
             transition: all 0.4s;
         }
 
-        .project-link:hover {
-            background: rgba(255,215,0,0.15);
-            border-color: #FFD700;
+        .automation-section .project-link:hover {
+            background: rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
             transform: translateX(10px);
+        }
+
+        .testimonials-section {
+            background: #000;
+            padding: 120px 50px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            padding: 50px;
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.5s;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 6rem;
+            color: rgba(255,215,0,0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255,215,0,0.3);
+            box-shadow: 0 20px 60px rgba(255,215,0,0.1);
+        }
+
+        .testimonial-text {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #ccc;
+            margin-bottom: 30px;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFD700, #FF6B6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .skills-grid {
@@ -413,6 +552,10 @@
             .screenshot-grid {
                 grid-template-columns: 1fr;
             }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -438,6 +581,10 @@
             .honors-sidebar {
                 display: none;
             }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -461,10 +608,13 @@
         </div>
     </section>
 
-    <section id="projects">
-        <h2 class="section-title">Selected Work</h2>
+    <section class="automation-section">
+        <div class="section-header">
+            <span class="section-icon">🤖</span>
+            <h2 class="section-title">Automation Projects</h2>
+            <p class="section-subtitle">Building intelligent systems that work while you sleep</p>
+        </div>
         <div class="projects-grid">
-            <!-- Cash Flow Project with 2 screenshots -->
             <div class="project-card">
                 <div class="project-browser">
                     <div class="browser-header">
@@ -474,21 +624,22 @@
                     </div>
                     <div class="browser-content">
                         <div class="screenshot-grid">
-                            <img src="images/cashflow-n8n.png" alt="Cash Flow n8n Workflow">
-                            <img src="images/cashflow-sheet.png" alt="Cash Flow Google Sheets">
+                            <img src="images/cashflow-n8n.png" alt="Cash Flow Workflow">
+                            <img src="images/cashflow-sheet.png" alt="Cash Flow Data">
                         </div>
                     </div>
                 </div>
                 <div class="project-content">
                     <h3 class="project-title">💰 Cash Flow Management System</h3>
                     <p class="project-description">
-                        Built an automated financial intelligence system using n8n that predicts cash flow problems 30-90 days in advance. Integrates with Xero to pull invoice data, calculate forecasts, send proactive alerts, and automatically email customers about overdue payments. A visual Dashboard was also created for the project and can be accessed using the button below.
+                        Built an automated financial intelligence system using n8n that predicts cash flow problems 30-90 days in advance. Integrates with Xero to pull invoice data, calculate forecasts, send proactive alerts to business owners, and automatically email customers about overdue payments—eliminating awkward collection calls.
                     </p>
                     <div class="project-tech">
                         <span class="tech-tag">n8n</span>
                         <span class="tech-tag">Xero API</span>
                         <span class="tech-tag">Gmail API</span>
                         <span class="tech-tag">Google Sheets</span>
+                        <span class="tech-tag">JavaScript</span>
                     </div>
                     <div class="project-links">
                         <a href="https://gogo2x.github.io/cashflow-dashboard/" target="_blank" class="project-link">View Dashboard →</a>
@@ -496,59 +647,6 @@
                 </div>
             </div>
 
-            <!-- Dolchain Project -->
-            <div class="project-card">
-                <div class="project-browser">
-                    <div class="browser-header">
-                        <div class="browser-dot"></div>
-                        <div class="browser-dot"></div>
-                        <div class="browser-dot"></div>
-                    </div>
-                    <div class="browser-content">
-                        <img src="images/dolchain.png" alt="Dolchain CRM System" class="project-screenshot">
-                    </div>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">⚙️ Dolchain - CRM Automation</h3>
-                    <p class="project-description">
-                        Provided executive support while developing automated CRM workflows for a crypto/blockchain project. Streamlined client onboarding, automated follow-ups, and built reporting systems. Reduced task turnaround time by 30%.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">CRM Automation</span>
-                        <span class="tech-tag">Zapier</span>
-                        <span class="tech-tag">Google Workspace</span>
-                        <span class="tech-tag">Data Management</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Avant IT Project -->
-            <div class="project-card">
-                <div class="project-browser">
-                    <div class="browser-header">
-                        <div class="browser-dot"></div>
-                        <div class="browser-dot"></div>
-                        <div class="browser-dot"></div>
-                    </div>
-                    <div class="browser-content">
-                        <img src="images/avant.png" alt="Avant IT Team Management" class="project-screenshot">
-                    </div>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">🚀 Avant IT - Team Management</h3>
-                    <p class="project-description">
-                        Managed remote outreach team promoting web services to U.S. businesses. Built automated lead-tracking systems in Google Sheets and Zapier. Reduced manual data entry by 50%, saving executives 10+ hours weekly.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Team Management</span>
-                        <span class="tech-tag">Zapier</span>
-                        <span class="tech-tag">Google Sheets</span>
-                        <span class="tech-tag">Lead Tracking</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Job Matching Project -->
             <div class="project-card">
                 <div class="project-browser">
                     <div class="browser-header">
@@ -559,14 +657,14 @@
                     <div class="browser-content">
                         <div class="screenshot-grid">
                             <img src="images/jobmatch-workflow.png" alt="Job Matching Workflow">
-                            <img src="images/jobmatch-sheet.png" alt="Job Matching Results">
+                            <img src="images/jobmatch-sheet.png" alt="Job Results">
                         </div>
                     </div>
                 </div>
                 <div class="project-content">
-                    <h3 class="project-title">🎯 Job Matching System</h3>
+                    <h3 class="project-title">🎯 Intelligent Job Matching System</h3>
                     <p class="project-description">
-                        Developed automation using n8n and OpenAI that analyzes CVs, identifies matching jobs from multiple boards, and logs results to Google Sheets. Improved efficiency by 40% for 200+ applications.
+                        Developed end-to-end automation using n8n and OpenAI that analyzes uploaded CVs, identifies matching jobs from multiple boards, and logs results to Google Sheets. Features custom API requests, conditional logic, and advanced data-splitting techniques. Improved job matching efficiency by 40% for 200+ applications.
                     </p>
                     <div class="project-tech">
                         <span class="tech-tag">n8n</span>
@@ -579,8 +677,89 @@
         </div>
     </section>
 
+    <section class="va-section">
+        <div class="section-header">
+            <span class="section-icon">🤝</span>
+            <h2 class="section-title">Virtual Assistant Projects</h2>
+            <p class="section-subtitle">Executive support that drives operational excellence</p>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-browser">
+                    <div class="browser-header">
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                    </div>
+                    <div class="browser-content">
+                        <img src="images/dolchain.png" alt="Dolchain" class="project-screenshot">
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">⚙️ Dolchain - AI Operations</h3>
+                    <p class="project-description">
+                        Served as primary operations coordinator for Dolchain, managing critical AI infrastructure and financial operations for a crypto/AI project. Monitored API usage across multiple AI models (Claude, GPT-4, Meta-Llama), managed API keys and token consumption. Processed $593.87 in AI spending with 99.9% accuracy. Generated weekly billing reports ($427.50/week average), processed international payments, and handled B2B client inquiries. Maintained 100% accuracy in financial reporting across 4+ months and reduced oversight time by 60%.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">AI Operations</span>
+                        <span class="tech-tag">Financial Tracking</span>
+                        <span class="tech-tag">CRM Management</span>
+                        <span class="tech-tag">API Management</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-browser">
+                    <div class="browser-header">
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                        <div class="browser-dot"></div>
+                    </div>
+                    <div class="browser-content">
+                        <img src="images/avant.png" alt="Avant IT" class="project-screenshot">
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">🚀 Avant IT - Team Management</h3>
+                    <p class="project-description">
+                        Managed remote outreach team promoting web services to U.S. businesses. Built automated lead-tracking systems in Google Sheets and Zapier. Implemented workflow automations ensuring real-time updates and team communication. Reduced manual data entry by 50%, enabling faster follow-ups. Delivered weekly performance reports through automated dashboards. Saved executives 10+ hours weekly.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Team Management</span>
+                        <span class="tech-tag">Zapier</span>
+                        <span class="tech-tag">Lead Tracking</span>
+                        <span class="tech-tag">Performance Reporting</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="section-header">
+            <h2 class="section-title" style="background: linear-gradient(135deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Client Testimonials</h2>
+            <p class="section-subtitle">What clients say about working with me</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    David's organizational skills and technical proficiency were instrumental in managing our AI infrastructure operations. He handled complex financial tracking, API management, and stakeholder reporting with exceptional accuracy. His ability to quickly understand our crypto/AI project needs and implement efficient systems made him an essential part of our team. We couldn't have scaled as smoothly without his support.
+                </p>
+                <div class="testimonial-author">Dolchain</div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    David transformed how our remote team operates. His automated lead-tracking system and proactive approach to data management saved us countless hours every week. He didn't just complete tasks—he identified inefficiencies and built solutions. His attention to detail and reliability made him an invaluable part of our growth strategy. We highly recommend him to any business looking to scale operations efficiently.
+                </p>
+                <div class="testimonial-author">Avant IT Services</div>
+            </div>
+        </div>
+    </section>
+
     <section id="skills">
-        <h2 class="section-title">Skills & Expertise</h2>
+        <h2 class="section-title" style="text-align: center; margin-bottom: 80px; background: linear-gradient(135deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Skills & Expertise</h2>
         <div class="skills-grid">
             <div class="skill-category">
                 <h3>Automation</h3>
@@ -648,14 +827,14 @@
 
     <section id="contact">
         <div class="contact-content">
-            <h2 class="section-title">Let's Work Together</h2>
+            <h2 class="section-title" style="background: linear-gradient(135deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Let's Work Together</h2>
             <p class="contact-text">
                 Looking for someone to automate your workflows, streamline operations, or provide executive support? Let's talk about your project.
             </p>
             <div class="contact-links">
-                <a href="mailto:chigoziedavid521@gmail.com" class="contact-btn">📧 Email Me</a>
-                <a href="https://www.linkedin.com/in/david-chigozie-75a80928a" target="_blank" class="contact-btn">💼 LinkedIn</a>
-                <a href="https://github.com/gogo2x" target="_blank" class="contact-btn">💻 GitHub</a>
+                 <a href="mailto:chigoziedavid521@gmail.com" class="contact-btn">📧 Email Me</a>
+                 <a href="https://www.linkedin.com/in/david-chigozie-75a80928a" target="_blank" class="contact-btn">💼 LinkedIn</a>
+                 <a href="https://github.com/gogo2x" target="_blank" class="contact-btn">💻 GitHub</a>
             </div>
         </div>
     </section>
