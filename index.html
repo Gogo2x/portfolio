@@ -205,161 +205,316 @@
 
         .projects-grid {
             display: grid;
-            gap: 100px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        .project-card {
-            transition: transform 0.6s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-20px);
-        }
-
-        .project-browser {
-            background: #1a1a1a;
+        .folder-card {
+            background: rgba(255,255,255,0.03);
+            border: 2px solid rgba(255,255,255,0.1);
             border-radius: 20px;
+            padding: 50px 35px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
-            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .automation-section .project-browser {
-            border-color: rgba(102, 126, 234, 0.3);
-            box-shadow: 0 40px 100px rgba(102, 126, 234, 0.2);
+        .folder-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
         }
 
-        .va-section .project-browser {
-            border-color: rgba(255, 215, 0, 0.3);
-            box-shadow: 0 40px 100px rgba(255, 215, 0, 0.2);
+        .automation-section .folder-card:hover::before {
+            opacity: 1;
         }
 
-        .browser-header {
-            background: #2d2d2d;
-            padding: 15px 20px;
-            display: flex;
-            gap: 8px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+        .va-section .folder-card::before {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), transparent);
         }
 
-        .browser-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
+        .folder-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
         }
 
-        .browser-dot:nth-child(1) { background: #ff5f56; }
-        .browser-dot:nth-child(2) { background: #ffbd2e; }
-        .browser-dot:nth-child(3) { background: #27c93f; }
-
-        .browser-content {
-            background: #111;
-            min-height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .automation-section .folder-card:hover {
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
         }
 
-        .project-screenshot {
-            width: 100%;
-            height: auto;
+        .va-section .folder-card:hover {
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+        }
+
+        .folder-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
             display: block;
         }
 
-        .screenshot-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2px;
+        .folder-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 15px;
         }
 
-        .screenshot-grid img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-content {
-            padding: 50px 40px;
-            background: rgba(0,0,0,0.5);
-        }
-
-        .project-title {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            font-weight: 800;
-        }
-
-        .automation-section .project-title {
+        .automation-section .folder-title {
             background: linear-gradient(135deg, #667eea, #00f2fe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .va-section .project-title {
+        .va-section .folder-title {
             background: linear-gradient(135deg, #FFD700, #FF6B6B);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .project-description {
-            font-size: 1.15rem;
-            line-height: 1.9;
-            color: #bbb;
-            margin-bottom: 30px;
+        .folder-preview {
+            font-size: 1rem;
+            color: #999;
+            line-height: 1.7;
+            margin-bottom: 20px;
         }
 
-        .project-tech {
+        .folder-cta {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #667eea;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .va-section .folder-cta {
+            color: #FFD700;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: #111;
+            border-radius: 25px;
+            max-width: 1100px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border: 2px solid rgba(255,255,255,0.1);
+            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-content.automation-theme {
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .modal-content.va-theme {
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: rgba(255,255,255,0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            padding: 50px 50px 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .modal-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .modal-title.automation-theme {
+            background: linear-gradient(135deg, #667eea, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-title.va-theme {
+            background: linear-gradient(135deg, #FFD700, #FF6B6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-body {
+            padding: 40px 50px 50px;
+        }
+
+        .modal-description {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #ccc;
+            margin-bottom: 35px;
+        }
+
+        .modal-tech {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 30px;
+            gap: 12px;
+            margin-bottom: 40px;
         }
 
         .tech-tag {
-            padding: 8px 18px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 25px;
             font-size: 0.9rem;
             font-weight: 600;
         }
 
-        .automation-section .tech-tag {
-            background: rgba(102, 126, 234, 0.1);
-            border: 1px solid rgba(102, 126, 234, 0.3);
+        .tech-tag.automation-theme {
+            background: rgba(102, 126, 234, 0.15);
+            border: 1px solid rgba(102, 126, 234, 0.4);
             color: #667eea;
         }
 
-        .va-section .tech-tag {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.3);
+        .tech-tag.va-theme {
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.4);
             color: #FFD700;
         }
 
-        .project-links {
+        .modal-screenshots {
+            margin-bottom: 40px;
+        }
+
+        .modal-screenshots h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .screenshot-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .screenshot-item {
+            background: #1a1a1a;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s;
+        }
+
+        .screenshot-item:hover {
+            transform: scale(1.05);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .modal-links {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
         }
 
-        .project-link {
+        .modal-link {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 700;
-            padding: 12px 24px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            padding: 14px 32px;
             border-radius: 50px;
-            transition: all 0.4s;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
         }
 
-        .automation-section .project-link:hover {
-            background: rgba(102, 126, 234, 0.15);
-            border-color: #667eea;
-            transform: translateX(10px);
+        .modal-link.automation-theme {
+            background: rgba(102, 126, 234, 0.2);
+            border: 2px solid #667eea;
+            color: #667eea;
+        }
+
+        .modal-link.automation-theme:hover {
+            background: #667eea;
+            color: #000;
+            transform: translateX(5px);
+        }
+
+        .modal-link.va-theme {
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid #FFD700;
+            color: #FFD700;
+        }
+
+        .modal-link.va-theme:hover {
+            background: #FFD700;
+            color: #000;
+            transform: translateX(5px);
         }
 
         .testimonials-section {
@@ -549,12 +704,12 @@
                 gap: 40px;
             }
 
-            .screenshot-grid {
+            .testimonials-grid {
                 grid-template-columns: 1fr;
             }
 
-            .testimonials-grid {
-                grid-template-columns: 1fr;
+            .modal-content {
+                max-height: 85vh;
             }
         }
 
@@ -585,6 +740,43 @@
             .skills-grid {
                 grid-template-columns: 1fr;
             }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-overlay {
+                padding: 20px;
+            }
+
+            .modal-header, .modal-body {
+                padding: 30px 25px;
+            }
+
+            .modal-title {
+                font-size: 2rem;
+            }
+
+            .screenshot-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .modal-content::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -600,139 +792,194 @@
         <div class="hero-content">
             <div class="hero-visual">
                 <div class="hero-letters">dc.</div>
+                <div class="hero-photo">👨🏾‍💻</div>
             </div>
             <div class="hero-text">
-                Hi, I'm <strong>David Chigozie</strong>, an Automation Specialist/Executive Virtual Assistant transforming how businesses operate. I've built systems that forecast cash flow, automate client communications, and eliminate 40% of repetitive tasks—saving teams 10+ hours weekly. Whether it's n8n workflows or executive support, I turn chaos into streamlined operations that scale.
+                Hi, I'm <strong>David Chigozie</strong>, an Automation Specialist transforming how businesses operate. I've built systems that forecast cash flow, automate client communications, and eliminate 40% of repetitive tasks—saving teams 10+ hours weekly. Whether it's n8n workflows or executive support, I turn chaos into streamlined operations that scale.
             </div>
         </div>
     </section>
 
-    <section class="automation-section">
+    <section class="automation-section" id="automation">
         <div class="section-header">
+            <span class="section-icon">🤖</span>
             <h2 class="section-title">Automation Projects</h2>
             <p class="section-subtitle">Building intelligent systems that work while you sleep</p>
         </div>
         <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-browser">
-                    <div class="browser-header">
-                        <div class="browser-dot"></div>
-                        <div class="browser-dot"></div>
-                        <div class="browser-dot"></div>
-                    </div>
-                    <div class="browser-content">
-                        <div class="screenshot-grid">
-                            <img src="images/cashflow-n8n.png" alt="Cash Flow Workflow">
-                            <img src="images/cashflow-sheet.png" alt="Cash Flow Data">
-                        </div>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Cash Flow Management System</h3>
-                    <p class="project-description">
-                        Built an automated financial intelligence system using n8n that predicts cash flow problems 30-90 days in advance. Integrates with Xero to pull invoice data, calculate forecasts, send proactive alerts to business owners, and automatically email customers about overdue payments—eliminating awkward collection calls.The Visual Dashboard for this project can be accessed using the button below.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">n8n</span>
-                        <span class="tech-tag">Xero API</span>
-                        <span class="tech-tag">Gmail API</span>
-                        <span class="tech-tag">Google Sheets</span>
-                        <span class="tech-tag">JavaScript</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://gogo2x.github.io/cashflow-dashboard/" target="_blank" class="project-link">View Dashboard →</a>
-                    </div>
-                </div>
+            <div class="folder-card" onclick="openModal('cashflow')">
+                <span class="folder-icon">📁</span>
+                <h3 class="folder-title">Cash Flow Management System</h3>
+                <p class="folder-preview">Automated financial forecasting that predicts problems 30-90 days in advance...</p>
+                <span class="folder-cta">Open Project →</span>
             </div>
 
-            <div class="project-card">
-                <div class="project-browser">
-                    <div class="browser-header">
-                        <div class="browser-dot"></div>
-                        <div class="browser-dot"></div>
-                        <div class="browser-dot"></div>
-                    </div>
-                    <div class="browser-content">
-                        <div class="screenshot-grid">
-                            <img src="images/jobmatch-workflow.png" alt="Job Matching Workflow">
-                            <img src="images/jobmatch-sheet.png" alt="Job Results">
-                        </div>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Intelligent Job Matching System</h3>
-                    <p class="project-description">
-                        Developed end-to-end automation using n8n and OpenAI that analyzes uploaded CVs, identifies matching jobs from multiple boards, and logs results to Google Sheets. Features custom API requests, conditional logic, and advanced data-splitting techniques. Improved job matching efficiency by 40% for 200+ applications.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">n8n</span>
-                        <span class="tech-tag">OpenAI API</span>
-                        <span class="tech-tag">Google Sheets</span>
-                        <span class="tech-tag">AI Integration</span>
-                    </div>
-                </div>
+            <div class="folder-card" onclick="openModal('jobmatch')">
+                <span class="folder-icon">📁</span>
+                <h3 class="folder-title">Intelligent Job Matching System</h3>
+                <p class="folder-preview">AI-powered CV analysis and job matching using n8n and OpenAI...</p>
+                <span class="folder-cta">Open Project →</span>
             </div>
         </div>
     </section>
 
-    <section class="va-section">
+    <section class="va-section" id="va">
         <div class="section-header">
             <span class="section-icon">🤝</span>
             <h2 class="section-title">Virtual Assistant Projects</h2>
             <p class="section-subtitle">Executive support that drives operational excellence</p>
         </div>
         <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-browser">
-                    <div class="browser-header">
-                        <div class="browser-dot"></div>
-                        <div class="browser-dot"></div>
-                        <div class="browser-dot"></div>
-                    </div>
-                    <div class="browser-content">
-                        <img src="images/dolchain.png" alt="Dolchain" class="project-screenshot">
-                    </div>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">⚙️ Dolchain - AI Operations</h3>
-                    <p class="project-description">
-                        Served as primary operations coordinator for Dolchain, managing critical AI infrastructure and financial operations for a crypto/AI project. Monitored API usage across multiple AI models (Claude, GPT-4, Meta-Llama), managed API keys and token consumption. Processed $593.87 in AI spending with 99.9% accuracy. Generated weekly billing reports ($427.50/week average), processed international payments, and handled B2B client inquiries. Maintained 100% accuracy in financial reporting across 4+ months and reduced oversight time by 60%.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">AI Operations</span>
-                        <span class="tech-tag">Financial Tracking</span>
-                        <span class="tech-tag">CRM Management</span>
-                        <span class="tech-tag">API Management</span>
-                    </div>
-                </div>
+            <div class="folder-card" onclick="openModal('dolchain')">
+                <span class="folder-icon">📁</span>
+                <h3 class="folder-title">Dolchain - AI Operations</h3>
+                <p class="folder-preview">Managing AI infrastructure and financial operations for crypto/AI project...</p>
+                <span class="folder-cta">Open Project →</span>
             </div>
 
-            <div class="project-card">
-                <div class="project-browser">
-                    <div class="browser-header">
-                        <div class="browser-dot"></div>
-                        <div class="browser-dot"></div>
-                        <div class="browser-dot"></div>
-                    </div>
-                    <div class="browser-content">
-                        <img src="images/avant.png" alt="Avant IT" class="project-screenshot">
+            <div class="folder-card" onclick="openModal('avant')">
+                <span class="folder-icon">📁</span>
+                <h3 class="folder-title">Avant IT - Team Management</h3>
+                <p class="folder-preview">Remote team management with automated lead-tracking systems...</p>
+                <span class="folder-cta">Open Project →</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cash Flow Modal -->
+    <div class="modal-overlay" id="modal-cashflow" onclick="closeModalOnOverlay(event, 'cashflow')">
+        <div class="modal-content automation-theme" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('cashflow')">✕</button>
+            <div class="modal-header">
+                <h2 class="modal-title automation-theme">💰 Cash Flow Management System</h2>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">
+                    Built an automated financial intelligence system using n8n that predicts cash flow problems 30-90 days in advance. Integrates with Xero to pull invoice data, calculate forecasts, send proactive alerts to business owners, and automatically email customers about overdue payments—eliminating awkward collection calls.
+                </p>
+                
+                <div class="modal-tech">
+                    <span class="tech-tag automation-theme">n8n</span>
+                    <span class="tech-tag automation-theme">Xero API</span>
+                    <span class="tech-tag automation-theme">Gmail API</span>
+                    <span class="tech-tag automation-theme">Google Sheets</span>
+                    <span class="tech-tag automation-theme">JavaScript</span>
+                </div>
+
+                <div class="modal-screenshots">
+                    <h4>Project Screenshots</h4>
+                    <div class="screenshot-gallery">
+                        <div class="screenshot-item">
+                            <img src="images/cashflow-n8n.png" alt="Cash Flow n8n Workflow" onerror="this.src='https://via.placeholder.com/400x300/667eea/ffffff?text=n8n+Workflow'">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="images/cashflow-sheet.png" alt="Cash Flow Dashboard" onerror="this.src='https://via.placeholder.com/400x300/00f2fe/ffffff?text=Dashboard'">
+                        </div>
                     </div>
                 </div>
-                <div class="project-content">
-                    <h3 class="project-title">Avant IT - Team Management</h3>
-                    <p class="project-description">
-                        Managed remote outreach team promoting web services to U.S. businesses. Built automated lead-tracking systems in Google Sheets and Zapier. Implemented workflow automations ensuring real-time updates and team communication. Reduced manual data entry by 50%, enabling faster follow-ups. Delivered weekly performance reports through automated dashboards. Saved executives 10+ hours weekly.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Team Management</span>
-                        <span class="tech-tag">Zapier</span>
-                        <span class="tech-tag">Lead Tracking</span>
-                        <span class="tech-tag">Performance Reporting</span>
+
+                <div class="modal-links">
+                    <a href="https://gogo2x.github.io/cashflow-dashboard/" target="_blank" class="modal-link automation-theme">🔗 View Live Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Job Match Modal -->
+    <div class="modal-overlay" id="modal-jobmatch" onclick="closeModalOnOverlay(event, 'jobmatch')">
+        <div class="modal-content automation-theme" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('jobmatch')">✕</button>
+            <div class="modal-header">
+                <h2 class="modal-title automation-theme">🎯 Intelligent Job Matching System</h2>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">
+                    Developed end-to-end automation using n8n and OpenAI that analyzes uploaded CVs, identifies matching jobs from multiple boards, and logs results to Google Sheets. Features custom API requests, conditional logic, and advanced data-splitting techniques. Improved job matching efficiency by 40% for 200+ applications.
+                </p>
+                
+                <div class="modal-tech">
+                    <span class="tech-tag automation-theme">n8n</span>
+                    <span class="tech-tag automation-theme">OpenAI API</span>
+                    <span class="tech-tag automation-theme">Google Sheets</span>
+                    <span class="tech-tag automation-theme">AI Integration</span>
+                </div>
+
+                <div class="modal-screenshots">
+                    <h4>Project Screenshots</h4>
+                    <div class="screenshot-gallery">
+                        <div class="screenshot-item">
+                            <img src="images/jobmatch-workflow.png" alt="Job Matching Workflow" onerror="this.src='https://via.placeholder.com/400x300/667eea/ffffff?text=Job+Matching+Workflow'">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="images/jobmatch-sheet.png" alt="Job Results Sheet" onerror="this.src='https://via.placeholder.com/400x300/00f2fe/ffffff?text=Results+Dashboard'">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- Dolchain Modal -->
+    <div class="modal-overlay" id="modal-dolchain" onclick="closeModalOnOverlay(event, 'dolchain')">
+        <div class="modal-content va-theme" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('dolchain')">✕</button>
+            <div class="modal-header">
+                <h2 class="modal-title va-theme">⚙️ Dolchain - AI Operations</h2>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">
+                    Served as primary operations coordinator for Dolchain, managing critical AI infrastructure and financial operations for a crypto/AI project. Monitored API usage across multiple AI models (Claude, GPT-4, Meta-Llama), managed API keys and token consumption. Processed $593.87 in AI spending with 99.9% accuracy. Generated weekly billing reports ($427.50/week average), processed international payments, and handled B2B client inquiries. Maintained 100% accuracy in financial reporting across 4+ months and reduced oversight time by 60%.
+                </p>
+                
+                <div class="modal-tech">
+                    <span class="tech-tag va-theme">AI Operations</span>
+                    <span class="tech-tag va-theme">Financial Tracking</span>
+                    <span class="tech-tag va-theme">CRM Management</span>
+                    <span class="tech-tag va-theme">API Management</span>
+                </div>
+
+                <div class="modal-screenshots">
+                    <h4>Project Screenshot</h4>
+                    <div class="screenshot-gallery">
+                        <div class="screenshot-item">
+                            <img src="images/dolchain.png" alt="Dolchain Operations" onerror="this.src='https://via.placeholder.com/500x300/FFD700/000000?text=Dolchain+AI+Operations'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Avant IT Modal -->
+    <div class="modal-overlay" id="modal-avant" onclick="closeModalOnOverlay(event, 'avant')">
+        <div class="modal-content va-theme" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('avant')">✕</button>
+            <div class="modal-header">
+                <h2 class="modal-title va-theme">🚀 Avant IT - Team Management</h2>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">
+                    Managed remote outreach team promoting web services to U.S. businesses. Built automated lead-tracking systems in Google Sheets and Zapier. Implemented workflow automations ensuring real-time updates and team communication. Reduced manual data entry by 50%, enabling faster follow-ups. Delivered weekly performance reports through automated dashboards. Saved executives 10+ hours weekly.
+                </p>
+                
+                <div class="modal-tech">
+                    <span class="tech-tag va-theme">Team Management</span>
+                    <span class="tech-tag va-theme">Zapier</span>
+                    <span class="tech-tag va-theme">Lead Tracking</span>
+                    <span class="tech-tag va-theme">Performance Reporting</span>
+                </div>
+
+                <div class="modal-screenshots">
+                    <h4>Project Screenshot</h4>
+                    <div class="screenshot-gallery">
+                        <div class="screenshot-item">
+                            <img src="images/avant.png" alt="Avant IT Operations" onerror="this.src='https://via.placeholder.com/500x300/FFD700/000000?text=Avant+IT+Team+Management'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section class="testimonials-section">
         <div class="section-header">
@@ -828,6 +1075,66 @@
             <h2 class="section-title" style="background: linear-gradient(135deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Let's Work Together</h2>
             <p class="contact-text">
                 Looking for someone to automate your workflows, streamline operations, or provide executive support? Let's talk about your project.
+            </p>
+            <div class="contact-links">
+                <a href="mailto:chigoziedavid521@gmail.com" class="contact-btn">📧 Email Me</a>
+                <a href="https://www.linkedin.com/in/david-chigozie-75a80928a" target="_blank" class="contact-btn">💼 LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 David Chigozie. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function openModal(projectId) {
+            const modal = document.getElementById('modal-' + projectId);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(projectId) {
+            const modal = document.getElementById('modal-' + projectId);
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function closeModalOnOverlay(event, projectId) {
+            if (event.target.classList.contains('modal-overlay')) {
+                closeModal(projectId);
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const activeModals = document.querySelectorAll('.modal-overlay.active');
+                activeModals.forEach(modal => {
+                    modal.classList.remove('active');
+                });
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
             </p>
             <div class="contact-links">
                 <a href="mailto:chigoziedavid521@gmail.com" class="contact-btn">📧 Email Me</a>
