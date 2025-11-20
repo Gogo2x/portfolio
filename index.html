@@ -820,6 +820,13 @@
                 <p class="folder-preview">AI-powered CV analysis and job matching using n8n and OpenAI...</p>
                 <span class="folder-cta">Open Project →</span>
             </div>
+
+            <div class="folder-card" onclick="openModal('contentpipeline')">
+                <span class="folder-icon">📁</span>
+                <h3 class="folder-title">Automated Content Generation Pipeline</h3>
+                <p class="folder-preview">AI-powered Reddit monitoring that generates platform-specific content automatically...</p>
+                <span class="folder-cta">Open Project →</span>
+            </div>
         </div>
     </section>
 
@@ -919,6 +926,58 @@
         </div>
     </div>
 
+    <!-- Content Pipeline Modal -->
+    <div class="modal-overlay" id="modal-contentpipeline" onclick="closeModalOnOverlay(event, 'contentpipeline')">
+        <div class="modal-content automation-theme" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal('contentpipeline')">✕</button>
+            <div class="modal-header">
+                <h2 class="modal-title automation-theme">🎯 Automated Content Generation Pipeline</h2>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">
+                    Built an intelligent content automation system for a wellness brand that monitors Reddit communities (r/wellness, r/biohacking, r/nutrition) every 6 hours, automatically detects trending topics, and generates platform-specific content using AI. The system solved inconsistent content uploads and helped the creator post trending content that drove significant engagement. Saved 10+ hours per week while increasing content output and audience engagement.
+                </p>
+                
+                <div class="modal-tech">
+                    <span class="tech-tag automation-theme">n8n</span>
+                    <span class="tech-tag automation-theme">OpenAI API</span>
+                    <span class="tech-tag automation-theme">Airtable</span>
+                    <span class="tech-tag automation-theme">Reddit API</span>
+                    <span class="tech-tag automation-theme">AI Content Generation</span>
+                </div>
+
+                <h4 style="font-size: 1.3rem; margin: 30px 0 15px; color: #fff;">Key Features</h4>
+                <ul style="color: #ccc; line-height: 2; margin-bottom: 30px; font-size: 1.05rem;">
+                    <li>✅ <strong>Instagram:</strong> Captions + 25 hashtags</li>
+                    <li>✅ <strong>TikTok:</strong> 60-second video scripts</li>
+                    <li>✅ <strong>Twitter:</strong> Thread formats</li>
+                    <li>✅ <strong>YouTube:</strong> Titles & descriptions</li>
+                    <li>✅ <strong>Blog:</strong> Post outlines</li>
+                </ul>
+
+                <h4 style="font-size: 1.3rem; margin: 30px 0 15px; color: #fff;">Results</h4>
+                <ul style="color: #ccc; line-height: 2; margin-bottom: 30px; font-size: 1.05rem;">
+                    <li>⏰ <strong>10+ hours saved weekly</strong> on content research and creation</li>
+                    <li>📈 <strong>Increased content output</strong> with consistent daily posts</li>
+                    <li>🔥 <strong>Higher engagement rates</strong> by leveraging trending topics</li>
+                    <li>🎯 <strong>Zero manual work</strong> - fully automated content pipeline</li>
+                </ul>
+
+                <div class="modal-screenshots">
+                    <h4>Project Screenshots</h4>
+                    <div class="screenshot-gallery">
+                        <div class="screenshot-item">
+                            <img src="images/content-pipeline-workflow.png" alt="Content Pipeline n8n Workflow" onerror="this.src='https://via.placeholder.com/400x300/667eea/ffffff?text=n8n+Content+Workflow'">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="images/content-pipeline-airtable.png" alt="Content Database" onerror="this.src='https://via.placeholder.com/400x300/00f2fe/ffffff?text=Airtable+Dashboard'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Dolchain Modal -->
     <div class="modal-overlay" id="modal-dolchain" onclick="closeModalOnOverlay(event, 'dolchain')">
         <div class="modal-content va-theme" onclick="event.stopPropagation()">
@@ -939,21 +998,20 @@
                 </div>
 
                 <div class="modal-screenshots">
-                    <h4>Project Screenshot</h4>
+                    <h4>Project Screenshots</h4>
                     <div class="screenshot-gallery">
                         <div class="screenshot-item">
                             <img src="images/dolchain.png" alt="Dolchain Operations" onerror="this.src='https://via.placeholder.com/500x300/FFD700/000000?text=Dolchain+AI+Operations'">
-                            </div>
-                            <div class="screenshot-item">
-                                <img src="images/dolchain-payments.png" alt="Dolchain Operations" onerror="this.src='https://via.placeholder.com/400x300/667eea/ffffff?text=Dolchain+AI+Operations'">
-                            </div>
-                            <div class="screenshot-item">
-                                <img src="images/dolchain-email management.png" alt="Dolchain Operations" onerror="this.src='https://via.placeholder.com/400x300/00f2fe/ffffff?Dolchain+AI+Operations'">
-                            </div>
-                            <div class="screenshot-item">
-                                <img src="images/dolchain-dashboard.png" alt="Dolchain Operations" onerror="this.src='https://via.placeholder.com/400x300/00f2fe/ffffff?Dolchain+AI+Operations'">
-                        </div>   
                         </div>
+                        <div class="screenshot-item">
+                            <img src="images/dolchain-payments.png" alt="Dolchain Payments" onerror="this.src='https://via.placeholder.com/400x300/667eea/ffffff?text=Dolchain+Payments'">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="images/dolchain-email management.png" alt="Dolchain Email Management" onerror="this.src='https://via.placeholder.com/400x300/00f2fe/ffffff?text=Email+Management'">
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="images/dolchain-dashboard.png" alt="Dolchain Dashboard" onerror="this.src='https://via.placeholder.com/400x300/00f2fe/ffffff?text=Dashboard'">
+                        </div>   
                     </div>
                 </div>
             </div>
@@ -980,7 +1038,7 @@
                 </div>
 
                 <div class="modal-screenshots">
-                    <h4>Project Screenshot</h4>
+                    <h4>Project Screenshots</h4>
                     <div class="screenshot-gallery">
                         <div class="screenshot-item">
                             <img src="images/avant.png" alt="Avant IT Operations" onerror="this.src='https://via.placeholder.com/500x300/FFD700/000000?text=Avant+IT+Team+Management'">
@@ -1096,6 +1154,7 @@
     <footer>
         <p>&copy; 2025 David Chigozie. All rights reserved.</p>
     </footer>
+
     <script>
         function openModal(projectId) {
             const modal = document.getElementById('modal-' + projectId);
@@ -1143,4 +1202,4 @@
         });
     </script>
 </body>
-
+</html>
